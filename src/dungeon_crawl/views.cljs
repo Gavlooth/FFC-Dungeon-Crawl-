@@ -7,7 +7,7 @@
 
 ;;:style\s"fill:(.+?);"
 
-
+(>spy :info (+ 1 2 3))
 
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])

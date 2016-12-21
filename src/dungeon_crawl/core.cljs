@@ -2,15 +2,15 @@
   (:require-macros [reagent.ratom :refer [reaction]]                   )
   (:require [reagent.core :refer [render] :as reagent]
             [dungeon-crawl.views :as views]
-             [devtools.core :as devtools]
+           ; [taoensso.timbre :as t ]
+            [devtools.core :as devtools]
             [re-frame.core :refer [reg-event-db register-sub subscribe dispatch dispatch-sync] :as re-frame]
             [goog.events :as events]
             [cljsjs.mousetrap]
             [dungeon-crawl.events :refer [initialize-game]]))
 
   (enable-console-print!)
-
-
+   (>spy :info (* 1 1 24))
 
  (defn bind-keys [width height]
       (doseq

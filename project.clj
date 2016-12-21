@@ -14,7 +14,7 @@
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
                  [re-frame "0.9.0-beta1"]
-                 [com.taoensso/timbre "4.7.0"]
+                 [com.taoensso/timbre "4.8.0"]
                  [binaryage/devtools "0.8.3"]
                  [binaryage/dirac "0.8.6"]
                  [cljsjs/mousetrap "1.5.3-0"]]
@@ -24,7 +24,6 @@
 		           (inject/in  cljs.core  > [taoensso.timbre  *config* *context* -elide? -levels-map -levels-set -levels-vec -log! -log-and-rethrow-errors -log-errors -logged-future -spy color-str compile-ns-filter debug debugf default-err default-out default-output-fn default-timestamp-opts error errorf example-config fatal fatalf get-?hostname get-?hostname_ get-env get-hostname handle-uncaught-jvm-exceptions! info infof level>= log log! log* log-and-rethrow-errors log-env log-errors log? logf logf* logged-future logging-enabled? logp may-log? merge-config! ordered-levels println-appender refer-timbre report reportf set-config! set-level! sometimes spit-appender spy stacktrace str-println swap-config! trace tracef valid-level valid-level? warn warnf with-config with-context with-default-outs with-level with-log-level with-logging-config with-merged-config])]
 
   :plugins [[lein-figwheel "0.5.8"]
-            [com.taoensso/timbre "4.8.0"]
             [lein-cljsbuild "1.1.4" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]
@@ -121,7 +120,7 @@
                                   [org.clojure/clojurescript "1.9.229"]
                                   [binaryage/dirac "0.8.6"]
                                   [figwheel-sidecar "0.5.8"]
-                                      [com.taoensso/timbre "4.7.0"]
+                                  [com.taoensso/timbre "4.8.0"]
 
                                   [com.cemerick/piggieback "0.2.1"]]
                    ;; need to add dev source path here to get user.clj loaded
