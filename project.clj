@@ -9,7 +9,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
 				         [cljsjs/mousetrap "1.5.3-0"]
                  [im.chit/vinyasa "0.4.7"]
-                  [org.clojure/clojurescript "1.9.229"]
+                 [org.clojure/clojurescript "1.9.229"]
                  [org.clojure/core.async "0.2.391"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
