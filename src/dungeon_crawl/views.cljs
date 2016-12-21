@@ -1,24 +1,26 @@
 (ns dungeon-crawl.views
   (:require [re-frame.core :refer [subscribe] :as re-frame]
-            [dungeon-crawl.consts :refer [sprites] :as consts]))
+            [dungeon-crawl.consts :refer [sprites] :as consts]
+            [dungeon-crawl.events]
+            ))
+(def log (.-log js/console))
 
 ;;:style\s"fill:(.+?);"
+
+
 
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])
 
+(defn random-room-dimensions [] [ (+ 300 (rand-int 200)) (+ 200 (rand-int 100))])
 
-(defn generate-room [hero-poss]
-  ( let [width (+ 300 (rand-int 200))   height (+ 100 (rand-int 200))  ]
-    [:svg {:width  width
-           :height height}
-     [sprites]
-     [:g [:rect {:width        width
-                 :height       height
-                 :class        "room"
-                 :id           "map"
-                 :fill         "blue"
-                 :fill-opacity "0.3"}]
-      [hero hero-poss]
-     ]]))
+
+
+(defn generate-room [width  height]
+  (let [hero-position (:position @(subscribe [:hero])) ]
+       [:svg {:width  width,
+             :height height,
+             :style {:background-color "lightblue" }}
+       [sprites]
+       [:g [hero hero-position]]]))
 
