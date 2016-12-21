@@ -1,10 +1,14 @@
 (ns dungeon-crawl.core
   (:require [reagent.core :refer[render] :as r]
             [dungeon-crawl.views :as views]
-            [re-frame.core :refer [reg-event-db dispatch-sync ] :as re-frame]))
+            [re-frame.core :refer [reg-event-db dispatch-sync ] :as re-frame]
+            [taoensso.timbre :as timbre
+              :refer [log  trace  debug  info  warn  error  fatal  report
+                  logf tracef debugf infof warnf errorf fatalf reportf
+                  spy get-env]]))
 (enable-console-print!)
 
-
+(info (+ 1 2 3))
 
 
 

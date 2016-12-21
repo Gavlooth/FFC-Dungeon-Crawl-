@@ -8,8 +8,6 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.229"]
-                 [org.clojure/core.async "0.2.391"
-                  :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
                  [re-frame "0.9.0-beta1"]
                  [binaryage/devtools "0.8.3"]
@@ -98,6 +96,7 @@
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.8.3"]
                                   [org.clojure/clojure "1.8.0"]
+                                  [com.taoensso/timbre "4.8.0"]
                                   [org.clojure/clojurescript "1.9.229"]
                                   [binaryage/dirac "0.8.6"]
                                   [figwheel-sidecar "0.5.8"]
