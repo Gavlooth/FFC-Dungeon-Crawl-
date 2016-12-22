@@ -1,5 +1,5 @@
 (ns dungeon-crawl.consts
-  (:require       [taoensso.timbre :as t  ]))
+  (:require  [taoensso.timbre :as t  ]))
 
 
 (def default-enemy   [{:x 100,
@@ -415,8 +415,7 @@
 
 
 
+;(def log (.-log js/console))
+;;:style\s"fill:(.+?);"
 
-
-
-;;(:style\s"fill:).+?"
 

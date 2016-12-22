@@ -5,9 +5,7 @@
                         [taoensso.timbre :as t  ]
 
             ))
-(def log (.-log js/console))
 
-;;:style\s"fill:(.+?);"
 
 
 (defn hero [[x y]]
@@ -24,4 +22,5 @@
              :style {:background-color "lightblue" }}
        [sprites]
        [:g [hero hero-position]]]))
+
 

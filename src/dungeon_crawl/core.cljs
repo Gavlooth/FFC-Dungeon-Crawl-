@@ -1,6 +1,5 @@
 (ns dungeon-crawl.core
-  (:require-macros [reagent.ratom :refer [reaction]]
-                   )
+  (:require-macros [reagent.ratom :refer [reaction]] )
   (:require [reagent.core :refer [render] :as reagent]
             [dungeon-crawl.views :as views]
             [taoensso.timbre :as t  ]
@@ -8,15 +7,10 @@
             [re-frame.core :refer [reg-event-db register-sub subscribe dispatch dispatch-sync] :as re-frame]
             [goog.events :as events]
             [cljsjs.mousetrap]
+            [dungeon-crawl.helper :refer [bind-keys]]
             [dungeon-crawl.events :refer [initialize-game]]))
   (enable-console-print!)
-  (t/spy :info (* 1 1 24))
 
-
-  (defn bind-keys [width height]
-      (doseq
-          [[x y] (map vector ["w" "d" "s" "a"]  [:up :right :down :left])]
-        (js/Mousetrap.bind x (fn [] (dispatch  [:move-hero y  width height])))))
 
 
 
