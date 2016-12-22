@@ -2,12 +2,13 @@
   (:require [re-frame.core :refer [subscribe] :as re-frame]
             [dungeon-crawl.consts :refer [sprites] :as consts]
             [dungeon-crawl.events]
+                        [taoensso.timbre :as t  ]
+
             ))
 (def log (.-log js/console))
 
 ;;:style\s"fill:(.+?);"
 
-(>spy :info (+ 1 2 3))
 
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])

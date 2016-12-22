@@ -1,4 +1,5 @@
-(ns dungeon-crawl.consts)
+(ns dungeon-crawl.consts
+  (:require       [taoensso.timbre :as t  ]))
 
 
 (def default-enemy   [{:x 100,

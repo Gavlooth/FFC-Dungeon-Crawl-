@@ -3,6 +3,8 @@
              [reagent.core :refer [render] :as reagent]
              [reagent.ratom :refer [reaction]]
              [cljsjs.mousetrap]
+                    [taoensso.timbre :as t  ]
+
              [re-frame.core :refer [reg-sub-raw reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
 
 
