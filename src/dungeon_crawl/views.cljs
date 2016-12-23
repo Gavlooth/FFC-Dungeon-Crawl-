@@ -2,9 +2,7 @@
   (:require [re-frame.core :refer [subscribe] :as re-frame]
             [dungeon-crawl.consts :refer [sprites] :as consts]
             [dungeon-crawl.events]
-                        [taoensso.timbre :as t  ]
-
-            ))
+                        [taoensso.timbre :as t  ]))
 
 
 
