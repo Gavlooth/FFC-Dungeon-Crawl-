@@ -3,7 +3,7 @@
              [reagent.core :refer [render] :as reagent]
              [reagent.ratom :refer [reaction]]
              [cljsjs.mousetrap]
-             [taoensso.timbre :as t]
+            [debux.cs.core :refer-macros [clog dbg break]]
              [re-frame.core :refer [reg-sub-raw reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
 
 

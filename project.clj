@@ -9,11 +9,11 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
 				         [cljsjs/mousetrap "1.5.3-0"]
                  [org.clojure/clojurescript "1.9.229"]
+                 [philoskim/debux "0.2.1"]
                  [org.clojure/core.async "0.2.391"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
                  [re-frame "0.9.0-beta1"]
-                 [com.taoensso/timbre "4.8.0"]
                  [binaryage/devtools "0.8.3"]
                  [binaryage/dirac "0.8.6"]
                  [cljsjs/mousetrap "1.5.3-0"]]
@@ -113,11 +113,11 @@
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.8.3"]
                                   [org.clojure/clojure "1.8.0"]
+                                  [philoskim/debux "0.2.1"]
                                   [org.clojure/clojurescript "1.9.229"]
                                   [binaryage/dirac "0.8.6"]
                                   [figwheel-sidecar "0.5.8"]
-                                  [com.taoensso/timbre "4.8.0"]
-                                  [com.cemerick/piggieback "0.2.1"]]
+                                   [com.cemerick/piggieback "0.2.1"]]
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
