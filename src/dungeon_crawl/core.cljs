@@ -19,8 +19,7 @@
     (initialize-game)
     (js/Mousetrap.reset)
     (bind-keys width height)
-    (bind-diagonal-movement width height)
-      (render   [views/generate-room width height]  (.getElementById js/document "app"))))
+    (render   [views/generate-room width height]  (.getElementById js/document "app"))))
 
 (mount-root)
 

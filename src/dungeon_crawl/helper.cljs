@@ -11,9 +11,6 @@
       [[x y] (map vector ["w" "d" "s" "a"]  [:up :right :down :left])]
       (js/Mousetrap.bind x (fn [] (dispatch  [:move-hero y  width height])))))
 
-  (defn bind-diagonal-movement [width height]
-      "Here we bind diagonal movement"
-    (js/Mousetrap.bind  "c+v" (fn []  (dispatch  [:move-hero  :up-right  width height]))))
 
 (t/info (map vector ["w" "d" "s" "a"]  [:up :right :down :left] [  ]))
 
