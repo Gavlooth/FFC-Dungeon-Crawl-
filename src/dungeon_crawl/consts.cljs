@@ -8,7 +8,7 @@
                        :life 100,
                        :damage "d2"}])
 
-(def default-items [ {:heart  [{:x 130,
+(def default-items [ {:hearts  [{:x 130,
                                  :y 150,
                                  :icon "#item-heart"
                                  :life-restore 20}]
@@ -26,7 +26,10 @@
                               :weapon {:name "bare hands", :damage "d4"},
                               :character-level  1,
                               :experience-points 100,
-                              :position [100 100]}})
+                              :position [100 100]},
+                    :item-collision false
+                    :enemy-collision false
+                    })
 
 
 (defn sprites []

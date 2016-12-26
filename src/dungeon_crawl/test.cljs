@@ -6,13 +6,11 @@
 (enable-console-print!)
 
 
-
 (deftest test-neighbors
-    (is (= true  (helper/is-neighbor? [10 10] [10 5]  [500 500])))
-  (is (nil?  (helper/is-neighbor? [10 10] [10 25]  [500 500])))
-  )
+    (is (= true  (helper/is-neighbor? [10 10])))
+  (is (nil?  (helper/is-neighbor? [10 10]  ))))
 
- (helper/sprite-neiborhood [10 10]  [500 500])
+ (helper/sprite-neiborhood [10 10])
 
 (run-tests 'dungeon-crawl.test)
 

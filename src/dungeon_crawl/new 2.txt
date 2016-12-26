@@ -1,0 +1,37 @@
+Dear luma
+ Of course choice of platform depends on many factors. 
+ The following reflect my personal opinion, and other options that elude me might be available.
+ I used to work  on F# doing some basic data analysis on kaggle with the R type provider
+ Which is a very handy tool. F# is an marvelous functional programming language,
+ It is typesafe, mature and  has a ton of futures (discriminated unions, pattern matching, types, lazy evaluation, e.t.c) 
+ and the VS. is the best IDE BY FAR.
+ Downsides are: a somewhat steep learning curve for the R type provider, you can only target CLR (common language runtime),
+ which means that you cannot use it to develop front end applications. There is Funscript (F# to js compiler) but is not 
+ a mature project, as far as I know. This is probably an option if you run your servers on on IIS-Microsoft. 
+ 
+ For web applications, a language that  compiles to JavaScript is mandatory. There are only two good functional options
+ Elm and clojurescript. Elm is a ML language family (Haskell, F#), and clojurescript is a lisp.
+ I cannot review something about Elm since I have never used it.
+ The reasons I switched from F# to clojure are:
+ It is a strategic decision for many data companies  (F# is used mostly in the financial sector).
+ It is a Lisp. You know clojure, you can work on Scheme/Racket easily. Also many companies using Java are also searching 
+ for clojure developers alternatively. Clojure is flexible and compiles to Java/Javascript/CLR. 
+ I am also a front end developer and Clojurescript  is clojure that compiles to JavaScript. I am developing freecoder's camp dungeon-crawl game in 
+ reagent (React) much faster that I did in pure JavaScript/react/redux/immutable.js (I left the pure js code unfinished to switch).
+ 
+ 
+ I am interested more in the role of developing web APIs, but I am flexible,
+ either role is something I would enjoy working on.
+ For visualization I would definitely use the D3.js visualization library : https://d3js.org/ 
+ For the UI/Frond end, I would use clojurescript with reagent&reframe. Reagent has its own virtual dom
+ And is blazing fast.
+ Data manipulation is excremly easy in lisp languages by default. They are based on the 
+ paradigm "code as data": https://en.wikipedia.org/wiki/Homoiconicity.
+ If machine learning is needed I would probably use incanter : https://github.com/incanter/incanter or the
+ Java/R Interface :https://rforge.net/JRI/
+ 
+ I would be available for ~ 20 - 25  hours until the end of January.
+ After that I could probably go full time for at least a couple of months.
+
+ 
+ 

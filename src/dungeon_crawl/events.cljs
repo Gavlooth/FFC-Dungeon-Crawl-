@@ -1,23 +1,26 @@
 (ns dungeon-crawl.events
    (:require [dungeon-crawl.consts :refer [initial-state default-enemy default-items ]]
+             [dungeon-crawl.helper :refer [ is-neighbor?]]
              [reagent.core :refer [render] :as reagent]
              [reagent.ratom :refer [reaction]]
              [cljsjs.mousetrap]
-            [debux.cs.core :refer-macros [clog dbg break]]
-             [re-frame.core :refer [reg-sub-raw reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
+             [devtools.core :as devtools]
+             [debux.cs.core :refer-macros [clog dbg break]]
+             [re-frame.core :refer [reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
 
+  (enable-console-print!)
 
+ (reg-event-db
+   :next-state
+   (fn [db [_ &args]]
+     (let [in-combat?  @(subscribe [:enemy-collision])
+            near-item? @(subscribe [:item-collision])
+            exits? nil
+            new-level? nil
+            hero (subscribe [:hero] ) ]
+       (if in-combat?
+         (let  [enemy (filter   is-neighbor? (hero ) )  ] )))))
 
-(reg-event-db
-  :heart
-  (fn
-   [db _]
-    (reaction (->  @db
-                   :dungeon
-                   (#(nth % (-> @db :current-room dec)))
-                   :room
-                   :items
-                   :heart))))
 
 
 
@@ -55,18 +58,4 @@
 
 
 (defn initialize-game [] (dispatch [:initialize-db]))
-
-
-(reg-sub-raw
- :hero
- (fn
-   [db _]
-        (reaction (:hero @db))))
-
-
-
-
-
-
-
 
