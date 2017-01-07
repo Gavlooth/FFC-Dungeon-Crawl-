@@ -2,20 +2,31 @@
   (:require [re-frame.core :refer [subscribe] :as re-frame]
             [dungeon-crawl.consts :refer [sprites] :as consts]
             [dungeon-crawl.events]
-                        [taoensso.timbre :as t  ]))
+            [debux.cs.core :refer-macros [clog dbg break]]
+            ))
 
+
+(def default-enemy   [{:x 100,
+                       :y 100,
+                       :icon "#vilain-thug",
+                       :life 100,
+                       :damage "d2"}])
 
 
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])
 
-(defn random-room-dimensions [] [ (+ 300 (rand-int 200)) (+ 200 (rand-int 100))])
+(defn draw-monsters []
+  (let [enemies (clog @(subscribe [:monsters]))]
+    (map #([:use { :x (:x %),
+                   :y (:y %),
+                   :xlinkHref   (:icon %)}]) enemies)))
 
 
 
-(defn generate-room [width  height]
-  (let [hero-position (:position @(subscribe [:hero])) ]
-       [:svg {:width  width,
+(defn draw-room []
+  (let [hero-position (:position @(subscribe [:hero])) [width  height] (:dimensions  @(subscribe [:running-room])) ]
+       [:svg {:width width,
              :height height,
              :style {:background-color "lightblue" }}
        [sprites]

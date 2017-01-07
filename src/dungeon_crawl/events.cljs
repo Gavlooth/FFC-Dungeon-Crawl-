@@ -37,7 +37,6 @@
       (= :up direction) (update-in db [:hero :position] (fn [[a b]]  [a (max 0 (- b 5))]))
       (= :up-right direction) (update-in db [:hero :position] (fn [[a b]]  [(min (+ 5 a ) (- width 15))
                                                                             (max 0 (- b 5))]))
-
       (= :right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a ) (- width 15)) b]))
       (= :down-right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a )
                                                                                   (- width 15))
