@@ -4,7 +4,9 @@ FIXME: Write a one-line description of your library/project.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+An atemp to build the freecode camp's dungeon crawl project in clojurescript instead of javascript.
+You can find description and user stories in freecode camp's front end development page
+
 
 ## Setup
 
