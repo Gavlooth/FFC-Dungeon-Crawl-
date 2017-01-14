@@ -117,7 +117,7 @@
                                   [org.clojure/clojurescript "1.9.229"]
                                   [binaryage/dirac "0.8.6"]
                                   [figwheel-sidecar "0.5.8"]
-                                   [com.cemerick/piggieback "0.2.1"]]
+                                  [com.cemerick/piggieback "0.2.1"]]
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER

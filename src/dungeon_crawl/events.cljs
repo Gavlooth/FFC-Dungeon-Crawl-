@@ -8,7 +8,10 @@
              [debux.cs.core :refer-macros [clog dbg break]]
              [re-frame.core :refer [reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
 
-  (enable-console-print!)
+ (enable-console-print!)
+
+ (defn attack-each-other [])
+
 
  (reg-event-db
    :next-state
@@ -19,7 +22,7 @@
             new-level? nil
             hero (subscribe [:hero] ) ]
        (if in-combat?
-         (let  [enemy (filter   is-neighbor? (hero ) )  ] )))))
+         (let  [enemy (filter  is-neighbor? @(subscribe [:monsters]))])))))
 
 
 

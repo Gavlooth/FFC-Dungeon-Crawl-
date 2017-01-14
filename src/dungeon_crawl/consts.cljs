@@ -1,18 +1,22 @@
 (ns dungeon-crawl.consts
-  (:require  [taoensso.timbre :as t  ]))
+  (:require  [debux.cs.core :as t  ]))
 
+(defn set-damage [x]
+  "Generate functions retarning integers between 1 and x"
+  (if (x > 1)
+    (fn [] (inc (rand-int 0 x)))
+    (fn [] 1)))
 
-(def default-enemy   [{:x 100,
-                       :y 100,
+(def default-enemy  [{ :position [100 100]
                        :icon "#vilain-thug",
                        :life 100,
-                       :damage "d2"}])
+                       :damage (set-damage 2)}])
 
 (def default-items [ {:hearts  [{:x 130,
                                  :y 150,
                                  :icon "#item-heart"
                                  :life-restore 20}]
-                       :weapon nil}])
+                      :weapon nil}])
 
 (def initial-exit [300 (+ 20 (rand-int 460))])
 
