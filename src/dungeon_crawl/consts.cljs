@@ -1,11 +1,8 @@
 (ns dungeon-crawl.consts
-  (:require  [debux.cs.core :as t  ]))
+  (:require  [debux.cs.core :as t]
+             [dungeon-crawl.helper :refer [set-damage]]))
 
-(defn set-damage [x]
-  "Generate functions retarning integers between 1 and x"
-  (if (x > 1)
-    (fn [] (inc (rand-int 0 x)))
-    (fn [] 1)))
+
 
 (def default-enemy  [{ :position [100 100]
                        :icon "#vilain-thug",

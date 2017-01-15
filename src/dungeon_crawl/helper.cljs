@@ -31,6 +31,18 @@
       (let [hero-neighborhood    (vals  (sprite-neiborhood  ( @(subscribe [:hero]) :position)))]
                (some  #(= % sprite) hero-neighborhood)))
 
+(defn set-damage [x]
+  "Generate functions retarning integers between 1 and x"
+  (if (x > 1)
+    (fn [] (inc (rand-int 0 x)))
+    (fn [] 1)))
 
+(defn exchange-attacks[monster]
+  "reduces the life of the hero and the engaged enemy. effectively in combat"
+  (let [hero   @(subscribe [:hero])
+        hero-attack ((@(subscribe [:hero]) :weapon) :damage)
+        monster-attack ((monster :weapon) :damage) ]
+    (vector (update-in hero [:life] #(- %  (monster-attack)) )
+            (update-in monster [:life] #(- % (hero-attack) )))))
 
 

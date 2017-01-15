@@ -22,9 +22,15 @@
             new-level? nil
             hero (subscribe [:hero] ) ]
        (if in-combat?
-         (let  [enemy (filter  is-neighbor? @(subscribe [:monsters]))])))))
+         ;;This is the place we have to update
+         (let  [[_ enemy] (filter  is-neighbor? (map-indexed   @(subscribe [:enemies]))   )]
+           (map  #(update db ) [:hero :enemies]      (exchange-attacks enemy)))))))
 
-
+(defn to-the-battle
+  "returns the updated hero and enemy array after exchanging damage"
+  [hero enemy-array]
+  ((let [indexed-enemy (filter (fn {})  (map-indexed #({%1 (identity %2)}) enemy-array)) ])
+    ))
 
 
 (reg-event-db
