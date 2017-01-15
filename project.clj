@@ -8,18 +8,20 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
 				         [cljsjs/mousetrap "1.5.3-0"]
-                 [org.clojure/clojurescript "1.9.229"]
+                 [org.clojure/clojurescript "1.9.293"]
                  [philoskim/debux "0.2.1"]
-                 [org.clojure/core.async "0.2.391"
+                 [org.clojure/core.async "0.2.395"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
-                 [re-frame "0.9.0-beta1"]
+                 [re-frame "0.9.1"]
                  [binaryage/devtools "0.8.3"]
-                 [binaryage/dirac "0.8.6"]
+                 [binaryage/dirac "1.0.0"]
                  [cljsjs/mousetrap "1.5.3-0"]]
 
 
   :plugins [[lein-figwheel "0.5.8"]
+            [lein-ancient "0.6.10"]
+
             [lein-cljsbuild "1.1.4" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]
@@ -114,8 +116,8 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "0.8.3"]
                                   [org.clojure/clojure "1.8.0"]
                                   [philoskim/debux "0.2.1"]
-                                  [org.clojure/clojurescript "1.9.229"]
-                                  [binaryage/dirac "0.8.6"]
+                                  [org.clojure/clojurescript "1.9.293"]
+                                  [binaryage/dirac "1.0.0"]
                                   [figwheel-sidecar "0.5.8"]
                                   [com.cemerick/piggieback "0.2.1"]]
                    ;; need to add dev source path here to get user.clj loaded

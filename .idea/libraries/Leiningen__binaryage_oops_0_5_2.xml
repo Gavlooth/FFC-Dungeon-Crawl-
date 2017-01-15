@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: binaryage/oops:0.5.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/binaryage/oops/0.5.2/oops-0.5.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
