@@ -27,7 +27,7 @@
                     :current-room 1,
                     :dungeon-level 1,
                     :hero    {:life 100,
-                              :weapon {:name "bare hands", :damage "d4"},
+                              :weapon {:name "bare hands", :damage (set-damage 4)},
                               :character-level  1,
                               :experience-points 100,
                               :position [100 100]},

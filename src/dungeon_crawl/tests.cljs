@@ -7,33 +7,30 @@
 (enable-console-print!)
 
 
-(def monster (first consts/default-enemy))
+(def monster (assoc  (first consts/default-enemy) :position  [100 125] ))
 
 (def hero (consts/initial-state :hero))
 
 
 
-(def monster (first consts/default-enemy))
-
-(def hero (consts/initial-state :hero))
 
 
 (is (= true  (helper/collision? monster hero)))
 
 (monster :position)
 ;;tests for helper functions
-(is (= 4 (+ 2 2)))
 
 
 
-(def monster (first default-enemy))
+
+(def monster (assoc (first default-enemy) :position [105 100]))
 
 (def hero (initial-state :hero))
 
 
-(helper/collision2? monster hero)
+(dbg (helper/exchange-attacks herro monster))
 
 
 
-(run-tests 'dungeon-crawl.test)
+(run-tests 'dungeon-crawl.tests)
 

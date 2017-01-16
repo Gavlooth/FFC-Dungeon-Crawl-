@@ -15,19 +15,23 @@
 
 
 
-(defn sprite-neiborhood [[a b] [ heigth width]  ]
+(defn sprite-neiborhood [[a b]]
   "outputs the squares adjanted in a given square"
-   {:north [a (max 0 (- b 5))],
-    :north-east [(min (+ 5 a ) (- heigth 15))   (max 0 (- b 5))],
-    :east [(min (+ 5 a ) (- heigth 15)) b],
-    :south-east [(min (+ 5 a ) (- heigth 15)) (min (- width 15) (+ 5  b))],
-    :south [ a (min (- width 15) (+ 5  b))],
-    :south-west  [ (max 0 (- a 5))  (min (- width 15) (+ 5  b))],
-    :west [ (max 0 (- a 5))  b],
-    :north-west [ (max 0 (- a 5))   (max 0 (- b 5))]})
+  { :north [a  (- b 5)],
+    :north-east [ (+ 5 a )     (- b 5)],
+    :east [(+ 5 a )  b],
+    :south-east [ (+ 5 a )  (+ 5  b)],
+    :south [ a  (+ 5  b)],
+    :south-west  [  (- a 5)   (+ 5  b)],
+    :west [  (- a 5)  b],
+    :north-west [  (- a 5)    (- b 5)]})
 
-(defn collision? [hero sprite room-dimensions]
-  (let [hero-neighborhood     (vals  ( sprite-neiborhood  (hero :position) room-dimensions))]
+
+
+
+
+(defn collision? [hero sprite]
+  (let [hero-neighborhood     (vals  ( sprite-neiborhood  (hero :position)))]
      (some  #(= %    (sprite :position) ) hero-neighborhood)))
 
 
@@ -43,14 +47,24 @@
 
 (defn set-combat-outcome
   "returns the updated hero and enemy array after exchanging damage"
-  [enemy-array hero room-dimensions]
+  [enemy-array hero]
   (let [ {[hostile & _]
-          true non-hostile false} (group-by    (fn [enemy]  (collision? hero enemy room-dimensions))   enemy-array) ;; group engaged enemies
-         [wounded-hero wounded-enemy]    (exchange-attacks hero hostile)] ;;exchange attacks between hero and enemy
+          true non-hostile false} (dbg (group-by    (partial collision? hero)   enemy-array)) ;; group engaged enemies
+         [wounded-hero wounded-enemy] (dbg   (exchange-attacks hero hostile))] ;;exchange attacks between hero and enemy
     (vector wounded-hero  (cons wounded-enemy non-hostile)))) ;;return the hero and the enemy
 
 
 
+(defn sprite-neiborhood-restrained [[a b] [ heigth width]  ]
+  "outputs the squares adjanted in a given square"
+   {:north [a (max 0 (- b 5))],
+    :north-east [(min (+ 5 a ) (- heigth 15))   (max 0 (- b 5))],
+    :east [(min (+ 5 a ) (- heigth 15)) b],
+    :south-east [(min (+ 5 a ) (- heigth 15)) (min (- width 15) (+ 5  b))],
+    :south [ a (min (- width 15) (+ 5  b))],
+    :south-west  [ (max 0 (- a 5))  (min (- width 15) (+ 5  b))],
+    :west [ (max 0 (- a 5))  b],
+    :north-west [ (max 0 (- a 5))   (max 0 (- b 5))]})
 
 
 
