@@ -8,7 +8,7 @@
     (fn [] 1)))
 
 
-(def default-enemy  [{ :position [15 15],
+(def default-enemy  [{ :position [105 105],
                        :icon "#vilain-thug",
                        :life 100,
                        :damage (set-damage 2)}])

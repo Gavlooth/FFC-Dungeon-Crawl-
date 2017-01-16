@@ -27,14 +27,14 @@
     :north-west [ (max 0 (- a 5))   (max 0 (- b 5))]})
 
 (defn collision? [hero sprite room-dimensions]
-  (let [hero-neighborhood    (dbg (vals  ( sprite-neiborhood  (hero :position) room-dimensions)))]
-    (dbg (some  #(= %  (dbg  (sprite :position)) ) hero-neighborhood))))
+  (let [hero-neighborhood     (vals  ( sprite-neiborhood  (hero :position) room-dimensions))]
+     (some  #(= %    (sprite :position) ) hero-neighborhood)))
 
 
- (def skata @(subscribe [:running-room]))
 
 
-(defn exchange-attacks[hero monster]
+
+(defn exchange-attacks [hero monster]
   "reduces the life of the hero and the engaged enemy by a random amount based on there atacks."
   (let [ hero-attack ((hero :weapon) :damage)
          monster-attack ((monster :weapon) :damage)]
@@ -43,25 +43,17 @@
 
 (defn set-combat-outcome
   "returns the updated hero and enemy array after exchanging damage"
-  [enemy-array]
-  (let [ {[hostile & _]  true non-hostile false}
-         (group-by is-neighbor? enemy-array)
-         [wounded-hero wounded-enemy]
-         (exchange-attacks hostile)]
-    (vector wounded-hero  (cons wounded-enemy non-hostile))))
+  [enemy-array hero room-dimensions]
+  (let [ {[hostile & _]
+          true non-hostile false} (group-by    (fn [enemy]  (collision? hero enemy room-dimensions))   enemy-array) ;; group engaged enemies
+         [wounded-hero wounded-enemy]    (exchange-attacks hero hostile)] ;;exchange attacks between hero and enemy
+    (vector wounded-hero  (cons wounded-enemy non-hostile)))) ;;return the hero and the enemy
 
 
 
 
-(def monster (first consts/default-enemy))
 
-(def hero (consts/initial-state :hero))
 
-(hero :position)
 
-(monster :position)
 
-(monster2 (assoc-in monster  :position   [120 120] ))
-
-(collision?  hero monster [500 500])
 

@@ -1,10 +1,16 @@
-(ns dungeon-crawl.test
+(ns dungeon-crawl.tests
   (:require  [debux.cs.core :refer-macros [clog dbg break]]
              [devtools.core :as devtools]
              [dungeon-crawl.helper :as helper]
              [dungeon-crawl.consts :as consts :refer [initial-state default-enemy]]
              [cljs.test :refer-macros [deftest is testing run-tests]]))
 (enable-console-print!)
+
+
+(def monster (first consts/default-enemy))
+
+(def hero (consts/initial-state :hero))
+
 
 
 (def monster (first consts/default-enemy))
