@@ -4,12 +4,16 @@
             [dungeon-crawl.views :as views]
             [dungeon-crawl.subscriptions]
             [devtools.core :as devtools]
-            [re-frame.core :refer [reg-event-db register-sub subscribe dispatch dispatch-sync] :as re-frame]
+            [re-frame.core :refer [reg-event-db
+                                   register-sub
+                                   subscribe
+                                   dispatch
+                                   dispatch-sync] :as re-frame]
             [goog.events :as events]
             [cljsjs.mousetrap]
             [debux.cs.core :refer-macros [clog dbg break]]
             [dungeon-crawl.helper :refer [bind-keys]]
-            [dungeon-crawl.events :refer [initialize-game]]))
+          [dungeon-crawl.events :refer [initialize-game]]))
 (enable-console-print!)
 
 (defn mount-root []
@@ -17,7 +21,8 @@
  (let [[width heigth] (:dimensions @(subscribe [:running-room]))]
    (js/Mousetrap.reset)
    (bind-keys)
-   (clog (render   [views/generate-room width heigth]  (.getElementById js/document "app")))))
+   (clog (render   [views/draw-room width heigth]
+                   (.getElementById js/document "app")))))
 
 (mount-root)
 

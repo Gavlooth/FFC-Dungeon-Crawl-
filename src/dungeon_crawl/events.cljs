@@ -12,7 +12,6 @@
 
 (defn attack-each-other [])
 
-
 #_(reg-event-db
     :next-state
     (fn [db [_ &args]]
@@ -24,15 +23,17 @@
              new-level? nil]
         (if in-combat?))))
            ;;This is the place we have to update
-           
 
 
+(reg-event-db
+  :monster-to-heart
+  (fn [db [_ &args]]
+    (let [monsters @(subscribe [:monsters])]
+      (update db :monsters  (map (fn [x](assoc x :icon "#item-heart") monsterst))))))
 
 (reg-event-db
   :initialize-db
   (fn [db _] (merge db initial-state)))
-
-
 
 (reg-event-db
  :move-hero

@@ -17,7 +17,7 @@
 
 (is (= true  (helper/collision? monster hero)))
 
-(monster :position)
+(:position monster)
 ;;tests for helper functions
 
 
@@ -28,7 +28,7 @@
 (def hero (initial-state :hero))
 
 
-(dbg (helper/exchange-attacks herro monster))
+ (helper/exchange-attacks hero monster)
 
 
 

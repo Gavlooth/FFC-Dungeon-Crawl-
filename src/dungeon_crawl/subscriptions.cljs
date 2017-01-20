@@ -4,15 +4,11 @@
              [re-frame.core :refer [reg-sub-raw subscribe]]))
 
 
-
 (reg-sub-raw
  :hero
  (fn
    [db _]
    (reaction (:hero @db))))
-
-
-
 
 (reg-sub-raw
   :heart
@@ -24,7 +20,6 @@
                    :room
                    :items
                    :hearts))))
-
 
 (reg-sub-raw
   :monsters
@@ -45,9 +40,6 @@
                    :room
                    :items
                    :weapon))))
-
-(dbg @(subscribe [:weapon]))
-
 
  (reg-sub-raw
   :item-collision

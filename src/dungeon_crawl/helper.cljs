@@ -4,14 +4,25 @@
               [dungeon-crawl.consts :as consts]))
 
 
-(def directions [:up :up-left :left :down-left :down :down-right :right :up-right])
+(def directions [:up :up-left
+                 :left :down-left
+                 :down :down-right
+                 :right :up-right])
 
 (defn bind-keys []
   "This function binds the game controls to the keyboard"
-  (clog (let [[heigth width] ( :dimensions @(subscribe [:running-room]) )] (js/Mousetrap.reset)
+  (clog (let [[heigth width]
+              ( :dimensions @(subscribe [:running-room]) )]
+          (js/Mousetrap.reset)
           (doseq
-            [[x y] (map vector ["w" "d" "s" "a"]  [:up :right :down :left])]
-            (js/Mousetrap.bind x (fn [] (dispatch  [:move-hero y  heigth width])))))))
+            [[x y] (map vector ["w" "d" "s" "a"]
+                        [:up :right :down :left])]
+            (js/Mousetrap.bind x (fn []
+                                   (dispatch
+                                          [:move-hero
+                                             y
+                                             heigth
+                                             width])))))))
 
 
 
@@ -40,8 +51,8 @@
 
 (defn exchange-attacks [hero monster]
   "reduces the life of the hero and the engaged enemy by a random amount based on there atacks."
-  (let [ hero-attack ((hero :weapon) :damage)
-         monster-attack ((monster :weapon) :damage)]
+  (let [ hero-attack   (:damage  (:weapon  hero) )
+         monster-attack   ( :damage  monster  )]
     (vector (update-in hero [:life] #(- %  (monster-attack)))
             (update-in monster [:life] #(- % (hero-attack))))))
 
@@ -49,9 +60,15 @@
   "returns the updated hero and enemy array after exchanging damage"
   [enemy-array hero]
   (let [ {[hostile & _]
-          true non-hostile false} (dbg (group-by    (partial collision? hero)   enemy-array)) ;; group engaged enemies
-         [wounded-hero wounded-enemy] (dbg   (exchange-attacks hero hostile))] ;;exchange attacks between hero and enemy
-    (vector wounded-hero  (cons wounded-enemy non-hostile)))) ;;return the hero and the enemy
+          true non-hostile false} (dbg (group-by
+                                         (partial collision? hero)
+                                         enemy-array)) ;; group engaged enemies
+         [wounded-hero wounded-enemy] (dbg
+                                        (exchange-attacks
+       ;;exchange attacks between hero and enemy
+                                          hero hostile))]
+     ;;return the hero and the enemy
+    (vector wounded-hero  (cons wounded-enemy non-hostile))))
 
 
 

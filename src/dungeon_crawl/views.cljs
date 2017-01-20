@@ -5,24 +5,20 @@
             [debux.cs.core :refer-macros [clog dbg break]]
             ))
 
-
 (def default-enemy   [{:x 100,
                        :y 100,
                        :icon "#vilain-thug",
                        :life 100,
                        :damage "d2"}])
 
-
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])
 
 (defn draw-monsters []
-  (let [enemies (clog @(subscribe [:monsters]))]
+  (let [enemies  @(subscribe [:monsters])]
     (map #([:use { :x (:x %),
                    :y (:y %),
                    :xlinkHref   (:icon %)}]) enemies)))
-
-
 
 (defn draw-room []
   (let [hero-position (:position @(subscribe [:hero])) [width  height] (:dimensions  @(subscribe [:running-room])) ]

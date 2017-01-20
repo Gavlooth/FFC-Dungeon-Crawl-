@@ -21,13 +21,14 @@
 (def initial-exit [300 (+ 20 (rand-int 460))])
 
 (def initial-state {:dungeon [{:room       {:dimensions [300 500],
-                                             :items      default-items,
-                                             :enemies    default-enemy,
-                                             :exit       initial-exit}}],
+                                            :items      default-items,
+                                            :enemies    default-enemy,
+                                            :exit       initial-exit}}],
                     :current-room 1,
                     :dungeon-level 1,
                     :hero    {:life 100,
-                              :weapon {:name "bare hands", :damage (set-damage 4)},
+                              :weapon {:name "bare hands",
+                                       :damage (set-damage 4)},
                               :character-level  1,
                               :experience-points 100,
                               :position [100 100]},
