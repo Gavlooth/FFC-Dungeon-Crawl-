@@ -7,7 +7,7 @@
 (enable-console-print!)
 
 
-(def monster (assoc  (first consts/default-enemy) :position  [100 125] ))
+
 
 (def hero (consts/initial-state :hero))
 
@@ -15,17 +15,16 @@
 
 
 
-(is (= true  (helper/collision? monster hero)))
 
-(:position monster)
-;;tests for helper functions
+
+
 
 
 
 
 (def monster (assoc (first default-enemy) :position [105 100]))
 
-(def hero (initial-state :hero))
+
 
 
  (helper/exchange-attacks hero monster)

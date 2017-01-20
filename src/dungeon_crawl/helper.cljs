@@ -11,7 +11,7 @@
 
 (defn bind-keys []
   "This function binds the game controls to the keyboard"
-  (clog (let [[heigth width]
+  (clog (let [[hight width]
               ( :dimensions @(subscribe [:running-room]) )]
           (js/Mousetrap.reset)
           (doseq
@@ -21,7 +21,7 @@
                                    (dispatch
                                           [:move-hero
                                              y
-                                             heigth
+                                             hight
                                              width])))))))
 
 
@@ -72,12 +72,12 @@
 
 
 
-(defn sprite-neiborhood-restrained [[a b] [ heigth width]  ]
+(defn sprite-neiborhood-restrained [[a b] [ hight width]  ]
   "outputs the squares adjanted in a given square"
    {:north [a (max 0 (- b 5))],
-    :north-east [(min (+ 5 a ) (- heigth 15))   (max 0 (- b 5))],
-    :east [(min (+ 5 a ) (- heigth 15)) b],
-    :south-east [(min (+ 5 a ) (- heigth 15)) (min (- width 15) (+ 5  b))],
+    :north-east [(min (+ 5 a ) (- hight 15))   (max 0 (- b 5))],
+    :east [(min (+ 5 a ) (- hight 15)) b],
+    :south-east [(min (+ 5 a ) (- hight 15)) (min (- width 15) (+ 5  b))],
     :south [ a (min (- width 15) (+ 5  b))],
     :south-west  [ (max 0 (- a 5))  (min (- width 15) (+ 5  b))],
     :west [ (max 0 (- a 5))  b],

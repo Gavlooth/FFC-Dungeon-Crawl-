@@ -16,15 +16,15 @@
           [dungeon-crawl.events :refer [initialize-game]]))
 (enable-console-print!)
 
-(defn mount-root []
+(defn run []
  (initialize-game)
  (let [[width heigth] (:dimensions @(subscribe [:running-room]))]
    (js/Mousetrap.reset)
    (bind-keys)
-   (clog (render   [views/draw-room width heigth]
-                   (.getElementById js/document "app")))))
+   (render   [views/draw-room width heigth]
+                    (.getElementById js/document "app"))))
 
-(mount-root)
+(run)
 
 
 

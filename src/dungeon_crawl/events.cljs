@@ -29,7 +29,7 @@
   :monster-to-heart
   (fn [db [_ &args]]
     (let [monsters @(subscribe [:monsters])]
-      (update db :monsters  (map (fn [x](assoc x :icon "#item-heart") monsterst))))))
+      (update db :monsters  (map (fn [x](assoc x :icon "#item-heart") monsters))))))
 
 (reg-event-db
   :initialize-db
@@ -37,7 +37,7 @@
 
 (reg-event-db
  :move-hero
- (fn [db [_ direction  width heigth]]
+ (fn [db [_ direction  width hight]]
    (cond
      (= :up direction) (update-in db [:hero :position] (fn [[a b]]  [a (max 0 (- b 5))]))
      (= :up-right direction) (update-in db [:hero :position] (fn [[a b]]  [(min (+ 5 a ) (- width 15))
@@ -45,13 +45,13 @@
      (= :right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a ) (- width 15)) b]))
      (= :down-right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a)
                                                                                  (- width 15))
-                                                                            (min (- heigth 15)
+                                                                            (min (- hight 15)
                                                                                  (+ 5  b))]))
 
-     (= :down direction) (update-in db [:hero :position] (fn [[a b]] [ a (min (- heigth 15)
+     (= :down direction) (update-in db [:hero :position] (fn [[a b]] [ a (min (- hight 15)
                                                                               (+ 5  b))]))
      (= :down-left direction) (update-in db [:hero :position] (fn [[a b]] [ (max 0 (- a 5))
-                                                                            (min (- heigth 15)
+                                                                            (min (- hight 15)
                                                                                  (+ 5  b))]))
 
      (= :left direction) (update-in db [:hero :position] (fn [[a b]] [ (max 0 (- a 5))  b]))

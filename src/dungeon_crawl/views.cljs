@@ -14,11 +14,26 @@
 (defn hero [[x y]]
   [:use { :x x, :y y, :xlinkHref "#hero"}])
 
+
+(defn enemy [[x y]]
+  [:use { :x x, :y y, :xlinkHref "#vilain-vampire"}])
+
+
+
+
+(defn draw-sprite [{ [x y] :position, icon :icon}]
+   [:use { :x  x,
+          :y  y,
+          :xlinkHref  icon}])
+
+
 (defn draw-monsters []
-  (let [enemies  @(subscribe [:monsters])]
-    (map #([:use { :x (:x %),
-                   :y (:y %),
-                   :xlinkHref   (:icon %)}]) enemies)))
+  (let [enemies   @(subscribe [:monsters])  ]
+     (map draw-sprite enemies)))
+(hero [33 33])
+
+(draw-monsters)
+
 
 (defn draw-room []
   (let [hero-position (:position @(subscribe [:hero])) [width  height] (:dimensions  @(subscribe [:running-room])) ]
@@ -26,6 +41,7 @@
              :height height,
              :style {:background-color "lightblue" }}
        [sprites]
-       [:g [hero hero-position]]]))
+
+        (into  [:g  [hero hero-position] ] (draw-monsters) )]))
 
 

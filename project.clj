@@ -35,7 +35,8 @@
                 ;; the presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "dungeon-crawl.core/on-js-reload"
+                :figwheel {
+;;                             :on-jsload "dungeon-crawl.core/on-js-reload"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and complied your application.
