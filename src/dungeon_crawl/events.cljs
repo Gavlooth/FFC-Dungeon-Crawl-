@@ -15,30 +15,52 @@
 
 
 
-#_(reg-event-db
-    :next-state
-    (fn [db [_ &args]]
-      (let [in-combat?  @(subscribe [:enemy-collision])
-             near-item? @(subscribe [:item-collision])
-             hero @(subscribe [:hero])
-             enemies @(subscribe [:enemies])
-             exits? nil
-             new-level? nil]
-        (if in-combat?
-          (let [combat-outcome (helper/set-combat-outcome enemies hero)
-                ]
-                         ) ))))
-           ;;This is the place we have to update
+(let [])
 
 
 (reg-event-db
-  :monster-to-heart
-  (fn [db [_ &args]]
-    (let [monsters @(subscribe [:monsters])]
-      (update db :monsters
-              (map
-                (fn [x](assoc x :icon "#item-heart")
-                     monsters))))))
+    :next-state
+    (fn [db [_ &args]]
+      (let [ { :keys
+               [ in-combat?
+                 hero
+                 current-room
+                 dungeon-level
+                 dungeon]} db
+             {:keys [dimensions items enemies exit]}
+             (-> db :dungeon  (#(nth % (dec current-room)))) ]
+        (if in-combat?
+          (let [combat-outcome (helper/set-combat-outcome enemies hero)]
+            (assoc-in
+              db
+              [:dungeon
+               current-room
+               :room :enemies] combat-outcome))))))
+
+
+
+
+
+
+(reg-event-db
+  :interact-with-items
+ (fn [db _] (let [  items  (-> db :dungeon
+                      (#(nth % (dec (:current-room db))))
+                      :items)
+               heart  (interact-what-sprite?
+                        (:heart items))
+
+               weapons (interact-what-sprite?
+                         (:weapons items))
+               hero (:hero db)
+               {:keys [life max-life]}  hero
+
+
+                    ]
+              cond
+              (< (:max-life hero)  (:life hero))   (update-in db [:hero :life]) (fn [x]  )       ))
+  )
+
 
 (reg-event-db
   :initialize-db

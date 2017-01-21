@@ -13,27 +13,27 @@
                        :life 100,
                        :damage (set-damage 2)}])
 
-(def default-items [ {:hearts  [{:position[  130 150]
+(def default-items [ {:heart  [{:position[  130 150]
                                  :icon "#item-heart"
                                  :life-restore 20}]
                       :weapon nil}])
 
-(def initial-exit [300 (+ 20 (rand-int 460))])
+(def initial-exit [300 100])
 
-(def initial-state {:dungeon [{:room       {:dimensions [300 500],
+(def initial-state {:dungeon [{:room       {:dimensions [500 300],
                                             :items      default-items,
                                             :enemies    default-enemy,
                                             :exit       initial-exit}}],
                     :current-room 1,
                     :dungeon-level 1,
                     :hero    {:life 100,
+                              :max-life 100
                               :weapon {:name "bare hands",
                                        :damage (set-damage 4)},
                               :character-level  1,
                               :experience-points 100,
                               :position [100 100]},
-                    :item-collision false
-                    :enemy-collision false})
+                    :in-combat? false})
 
 
 

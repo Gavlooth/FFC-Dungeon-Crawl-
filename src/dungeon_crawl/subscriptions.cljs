@@ -19,7 +19,7 @@
                    (#(nth % (-> @db :current-room dec)))
                    :room
                    :items
-                   :hearts))))
+                   :heart))))
 
 (reg-sub-raw
   :monsters
@@ -43,16 +43,12 @@
                    :items
                    :weapon))))
 
- (reg-sub-raw
-  :item-collision
-  (fn
-    [db _]
-     (reaction (:item-collision @db))))
+
 
  (reg-sub-raw
-   :enemy-collision
+   :in-combat?
    (fn  [db _]
-     (reaction (:enemy-collision @db))))
+     (reaction (:in-combat? @db))))
 
  (reg-sub-raw
    :running-room

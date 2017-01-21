@@ -42,16 +42,22 @@
 
 
 (defn collision? [hero sprite]
-  (let [hero-neighborhood     (vals  ( sprite-neiborhood  (hero :position)))]
-     (some  #(= %    (sprite :position) ) hero-neighborhood)))
+  "check if we are in the neiborhood of a sprite"
+  (let [hero-neighborhood (vals  ( sprite-neiborhood  (hero :position)))]
+     (some  #(= % (sprite :position) ) hero-neighborhood)))
 
 
-
+(defn interact-what-sprite? [hero sprite-array]
+"check for sprite interaction and return the sprite along with the index"
+(keep-indexed
+  (fn [idx item]
+    (when (collision? hero sprite)
+      (vector idx sprite))) sprite-array) )
 
 
 (defn exchange-attacks [hero monster]
   "reduces the life of the hero and the engaged enemy by a
-  random amount based on there atacks."
+  random amount using there respective attacks."
   (let [ hero-attack   (:damage  (:weapon  hero) )
          monster-attack   ( :damage  monster  )]
     (vector (update-in hero [:life] #(- %  (monster-attack)))
@@ -68,20 +74,14 @@
                  enemy-array)
          [wounded-hero wounded-enemy]
             (exchange-attacks  hero hostile)]
-    (vector wounded-hero  (cons wounded-enemy non-hostile))))
+    (if  (> 0 (:life wounded-enemy))
+      (vector wounded-hero  (cons wounded-enemy non-hostile))
+      (vector wounded-hero   non-hostile)
+      )))
 
 
 
-(defn sprite-neiborhood-restrained [[a b] [ hight width]  ]
-  "outputs the squares adjanted in a given square"
-   {:north [a (max 0 (- b 5))],
-    :north-east [(min (+ 5 a ) (- hight 15))   (max 0 (- b 5))],
-    :east [(min (+ 5 a ) (- hight 15)) b],
-    :south-east [(min (+ 5 a ) (- hight 15)) (min (- width 15) (+ 5  b))],
-    :south [ a (min (- width 15) (+ 5  b))],
-    :south-west  [ (max 0 (- a 5))  (min (- width 15) (+ 5  b))],
-    :west [ (max 0 (- a 5))  b],
-    :north-west [ (max 0 (- a 5))   (max 0 (- b 5))]})
+
 
 
 
