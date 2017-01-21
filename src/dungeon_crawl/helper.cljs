@@ -50,7 +50,8 @@
 
 
 (defn exchange-attacks [hero monster]
-  "reduces the life of the hero and the engaged enemy by a random amount based on there atacks."
+  "reduces the life of the hero and the engaged enemy by a
+  random amount based on there atacks."
   (let [ hero-attack   (:damage  (:weapon  hero) )
          monster-attack   ( :damage  monster  )]
     (vector (update-in hero [:life] #(- %  (monster-attack)))
@@ -60,14 +61,13 @@
   "returns the updated hero and enemy array after exchanging damage"
   [enemy-array hero]
   (let [ {[hostile & _]
-          true non-hostile false} (dbg (group-by
-                                         (partial collision? hero)
-                                         enemy-array)) ;; group engaged enemies
-         [wounded-hero wounded-enemy] (dbg
-                                        (exchange-attacks
-       ;;exchange attacks between hero and enemy
-                                          hero hostile))]
-     ;;return the hero and the enemy
+          true non-hostile false}
+         ;; group engaged enemies
+          (group-by
+              (partial collision? hero)
+                 enemy-array)
+         [wounded-hero wounded-enemy]
+            (exchange-attacks  hero hostile)]
     (vector wounded-hero  (cons wounded-enemy non-hostile))))
 
 

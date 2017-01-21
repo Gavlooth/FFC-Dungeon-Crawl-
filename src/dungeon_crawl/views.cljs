@@ -30,13 +30,12 @@
 (defn draw-monsters []
   (let [enemies   @(subscribe [:monsters])  ]
      (map draw-sprite enemies)))
-(hero [33 33])
 
-(draw-monsters)
 
 
 (defn draw-room []
-  (let [hero-position (:position @(subscribe [:hero])) [width  height] (:dimensions  @(subscribe [:running-room])) ]
+  (let [hero-position (:position @(subscribe [:hero]))
+        [width  height] (:dimensions  @(subscribe [:running-room])) ]
        [:svg {:width width,
              :height height,
              :style {:background-color "lightblue" }}

@@ -6,11 +6,14 @@
              [cljsjs.mousetrap]
              [devtools.core :as devtools]
              [debux.cs.core :refer-macros [clog dbg break]]
-             [re-frame.core :refer [reg-event-db subscribe dispatch dispatch-sync] :as re-frame]))
+             [re-frame.core :refer [reg-event-db
+                                    subscribe
+                                    dispatch
+                                    dispatch-sync] :as re-frame]))
 
 (enable-console-print!)
 
-(defn attack-each-other [])
+
 
 #_(reg-event-db
     :next-state
@@ -21,7 +24,10 @@
              enemies @(subscribe [:enemies])
              exits? nil
              new-level? nil]
-        (if in-combat?))))
+        (if in-combat?
+          (let [combat-outcome (helper/set-combat-outcome enemies hero)
+                ]
+                         ) ))))
            ;;This is the place we have to update
 
 
@@ -29,7 +35,10 @@
   :monster-to-heart
   (fn [db [_ &args]]
     (let [monsters @(subscribe [:monsters])]
-      (update db :monsters  (map (fn [x](assoc x :icon "#item-heart") monsters))))))
+      (update db :monsters
+              (map
+                (fn [x](assoc x :icon "#item-heart")
+                     monsters))))))
 
 (reg-event-db
   :initialize-db
@@ -39,25 +48,41 @@
  :move-hero
  (fn [db [_ direction  width hight]]
    (cond
-     (= :up direction) (update-in db [:hero :position] (fn [[a b]]  [a (max 0 (- b 5))]))
-     (= :up-right direction) (update-in db [:hero :position] (fn [[a b]]  [(min (+ 5 a ) (- width 15))
-                                                                           (max 0 (- b 5))]))
-     (= :right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a ) (- width 15)) b]))
-     (= :down-right direction) (update-in db [:hero :position] (fn [[a b]] [(min (+ 5 a)
-                                                                                 (- width 15))
-                                                                            (min (- hight 15)
-                                                                                 (+ 5  b))]))
+     (= :up direction) (update-in db [:hero :position]
+                                  (fn [[a b]]  [a (max 0 (- b 5))]))
+     (= :up-right direction) (update-in db [:hero :position]
+                                        (fn [[a b]]
+                                          [(min (+ 5 a )
+                                               (- width 15))
+                                                      (max 0 (- b 5))]))
 
-     (= :down direction) (update-in db [:hero :position] (fn [[a b]] [ a (min (- hight 15)
-                                                                              (+ 5  b))]))
-     (= :down-left direction) (update-in db [:hero :position] (fn [[a b]] [ (max 0 (- a 5))
-                                                                            (min (- hight 15)
-                                                                                 (+ 5  b))]))
+     (= :right direction) (update-in db [:hero :position]
+                                     (fn [[a b]]
+                                       [(min (+ 5 a )
+                                               (- width 15)) b]))
+     (= :down-right direction) (update-in db [:hero :position]
+                                          (fn [[a b]] [(min (+ 5 a)                                                                                 (- width 15))
+                                                       (min (- hight 15)
+                                                             (+ 5  b))]))
 
-     (= :left direction) (update-in db [:hero :position] (fn [[a b]] [ (max 0 (- a 5))  b]))
+     (= :down direction) (update-in db [:hero :position]
+                                    (fn [[a b]]
+                                      [ a (min (- hight 15)
+                                             (+ 5  b))]))
+     (= :down-left direction) (update-in db [:hero :position]
+                                         (fn [[a b]]
+                                           [ (max 0 (- a 5))
+                                             (min (- hight 15)
+                                                  (+ 5  b))]))
 
-     (= :up-left direction) (update-in db [:hero :position] (fn [[a b]] [ (max 0 (- a 5))
-                                                                          (max 0 (- b 5))]))
+     (= :left direction) (update-in db [:hero :position]
+                                    (fn [[a b]]
+                                      [ (max 0 (- a 5))  b]))
+
+     (= :up-left direction) (update-in db [:hero :position]
+                                       (fn [[a b]] [ (max 0 (- a 5))
+                                         (max 0 (- b 5))]))
+
      :else ( println "direction not found"))))
 
 
