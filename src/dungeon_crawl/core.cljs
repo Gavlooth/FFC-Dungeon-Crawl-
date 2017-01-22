@@ -1,7 +1,7 @@
 (ns dungeon-crawl.core
   (:require-macros [reagent.ratom :refer [reaction]])
   (:require [reagent.core :refer [render] :as reagent]
-            [dungeon-crawl.views :as views]
+            [dungeon-crawl.views :as views :refer [draw-room]]
             [dungeon-crawl.subscriptions]
             [devtools.core :as devtools]
             [re-frame.core :refer [reg-event-db
@@ -18,13 +18,13 @@
 
 (defn run []
  (initialize-game)
- (let [[width heigth] (:dimensions @(subscribe [:running-room]))]
+  (let [[width heigth] (:dimensions (clog @(subscribe [:running-room])))]
    (js/Mousetrap.reset)
    (bind-keys)
-   (render   [views/draw-room width heigth]
-                    (.getElementById js/document "app"))))
+    (render   [draw-room]
+                     (.getElementById js/document "app"))))
 
-(run)
+ (run)
 
 
 

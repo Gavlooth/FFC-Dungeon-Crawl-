@@ -40,7 +40,5 @@
              :height height,
              :style {:background-color "lightblue" }}
        [sprites]
-
-        (into  [:g  [hero hero-position] ] (draw-monsters) )]))
-
+         (into  [:g  [hero hero-position] ] (draw-monsters) )]))
 

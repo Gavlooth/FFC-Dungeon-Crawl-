@@ -11,18 +11,14 @@
 
 (defn bind-keys []
   "This function binds the game controls to the keyboard"
-   (let [[hight width]
-               ( :dimensions @(subscribe [:running-room]) )]
-           (js/Mousetrap.reset)
-           (doseq
-             [[x y] (map vector ["w" "d" "s" "a"]
-                         [:up :right :down :left])]
-             (js/Mousetrap.bind x (fn []
-                                    (dispatch
-                                      [:move-hero
-                                       y
-                                       hight
-                                       width]))))))
+
+  (js/Mousetrap.reset)
+  (doseq
+    [[x y] (map vector ["w" "d" "s" "a"]
+                [:up :right :down :left])]
+    (js/Mousetrap.bind x (fn []
+                           (dispatch
+                             [:move-hero y])))))
 
 
 

@@ -20,32 +20,16 @@
 
 #_(reg-event-db
     :next-state
-    (fn [db [_ direction  width hight]]
-      (let [ { :keys
-               [ in-combat?
-                 hero
-                 current-room
-                 dungeon-level
-                 dungeon]} db
-             {:keys [dimensions items enemies exit]}
-             (-> db :dungeon  (#(nth % (dec current-room)))) ]
-        (if in-combat?
-          (let [combat-outcome (helper/set-combat-outcome enemies hero)]
-            (assoc-in
-              db
-              [:dungeon
-               current-room
-               :room :enemies] combat-outcome))))))
+    (fn [db [_ direction  width hight]]  ))
 
 
 
 
-;;WE ARE DOING THIS NOW
 
 (reg-event-db
   :interact-with-items
  (fn [db _]
-   (let [{hero :hero } db {:keys [max-life life]} hero]
+   (let [{{:keys [max-life life]} :hero } db ]
      (if-let  [heart (get-in db [:dungeon
                                  (:current-room db)
                                  :items
@@ -79,45 +63,41 @@
 
 (reg-event-db
  :move-hero
- (fn [db [_ direction  width hight]]
-   (cond
-     (= :up direction) (update-in db [:hero :position]
-                                  (fn [[a b]]  [a (max 0 (- b 5))]))
-     (= :up-right direction) (update-in db [:hero :position]
-                                        (fn [[a b]]
-                                          [(min (+ 5 a )
-                                               (- width 15))
-                                                      (max 0 (- b 5))]))
+ (fn [db [_ direction]]
+   (let [ {:keys [ hero current-room dungeon-level dungeon]} db
+          {:keys [dimensions items enemies exit] [width hight] :dimensions }
+           (get-in dungeon [current-room :room])
+          in-combat? (some #( collision? hero %) enemies)  ]
+     (if in-combat?
+       (let [combat-outcome (helper/set-combat-outcome enemies hero)]
+         (assoc-in
+           db
+           [:dungeon
+            current-room
+            :room :enemies] combat-outcome))
 
-     (= :right direction) (update-in db [:hero :position]
-                                     (fn [[a b]]
-                                       [(min (+ 5 a )
-                                               (- width 15)) b]))
-     (= :down-right direction) (update-in db [:hero :position]
-                                          (fn [[a b]] [(min (+ 5 a)                                                                                 (- width 15))
-                                                       (min (- hight 15)
-                                                             (+ 5  b))]))
+       (cond
+         (= :up direction) (update-in db [:hero :position]
+                                      (fn [[a b]]  [a (max 0 (- b 5))]))
 
-     (= :down direction) (update-in db [:hero :position]
-                                    (fn [[a b]]
-                                      [ a (min (- hight 15)
-                                             (+ 5  b))]))
-     (= :down-left direction) (update-in db [:hero :position]
+
+         (= :right direction)  (update-in db [:hero :position]
+                                          (fn [[a b]]
+                                            [(min (+ 5 a ) (- width 15)) b]))
+
+
+         (= :down direction)  (update-in db [:hero :position]
                                          (fn [[a b]]
-                                           [ (max 0 (- a 5))
-                                             (min (- hight 15)
-                                                  (+ 5  b))]))
+                                           [a (max  (clog (- hight 15)) (+ 5  b))]))
 
-     (= :left direction) (update-in db [:hero :position]
-                                    (fn [[a b]]
-                                      [ (max 0 (- a 5))  b]))
 
-     (= :up-left direction) (update-in db [:hero :position]
-                                       (fn [[a b]] [ (max 0 (- a 5))
-                                         (max 0 (- b 5))]))
+         (= :left direction) (update-in db [:hero :position]
+                                        (fn [[a b]]
+                                          [ (max 0 (- a 5))  b]))
 
-     :else ( println "direction not found"))))
+
+
+         :else ( println "cannot follow direction"))))))
 
 
 (defn initialize-game [] (dispatch [:initialize-db]))
-

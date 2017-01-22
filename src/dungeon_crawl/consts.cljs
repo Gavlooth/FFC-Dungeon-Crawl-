@@ -8,7 +8,7 @@
     (fn [] 1)))
 
 
-(def default-enemy  [{ :position [105 105],
+(def default-enemy  [{ :position [130 150],
                        :icon "#vilain-thug",
                        :life 100,
                        :damage (set-damage 2)}])
@@ -24,7 +24,7 @@
                                             :items      default-items,
                                             :enemies    default-enemy,
                                             :exit       initial-exit}}],
-                    :current-room 1,
+                    :current-room 0,
                     :dungeon-level 1,
                     :hero    {:life 100,
                               :max-life 100
@@ -32,8 +32,7 @@
                                        :damage (set-damage 4)},
                               :character-level  1,
                               :experience-points 100,
-                              :position [100 100]},
-                    :in-combat? false})
+                              :position [100 100]}})
 
 
 
