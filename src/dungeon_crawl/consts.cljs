@@ -13,9 +13,9 @@
                        :life 100,
                        :damage (set-damage 2)}])
 
-(def default-items [ {:heart  [{:position[  130 150]
+(def default-items [ {:heart  {:position [130 150]
                                  :icon "#item-heart"
-                                 :life-restore 20}]
+                                 :life-restore 20}
                       :weapon nil}])
 
 (def initial-exit [300 100])

@@ -1,6 +1,6 @@
 (ns dungeon-crawl.events
    (:require [dungeon-crawl.consts :refer [initial-state default-enemy default-items]]
-             [dungeon-crawl.helper :refer [ collision?]]
+             [dungeon-crawl.helper :refer [ collision?] :as helper]
              [reagent.core :refer [render] :as reagent]
              [reagent.ratom :refer [reaction]]
              [cljsjs.mousetrap]
@@ -15,12 +15,12 @@
 
 
 
-(let [])
 
 
-(reg-event-db
+
+#_(reg-event-db
     :next-state
-    (fn [db [_ &args]]
+    (fn [db [_ direction  width hight]]
       (let [ { :keys
                [ in-combat?
                  hero
@@ -40,26 +40,37 @@
 
 
 
-
+;;WE ARE DOING THIS NOW
 
 (reg-event-db
   :interact-with-items
- (fn [db _] (let [  items  (-> db :dungeon
-                      (#(nth % (dec (:current-room db))))
-                      :items)
-               heart  (interact-what-sprite?
-                        (:heart items))
+ (fn [db _]
+   (let [{hero :hero } db {:keys [max-life life]} hero]
+     (if-let  [heart (get-in db [:dungeon
+                                 (:current-room db)
+                                 :items
+                                 :heart ]) ]
 
-               weapons (interact-what-sprite?
-                         (:weapons items))
-               hero (:hero db)
-               {:keys [life max-life]}  hero
-
-
-                    ]
-              cond
-              (< (:max-life hero)  (:life hero))   (update-in db [:hero :life]) (fn [x]  )       ))
-  )
+       (if (> max-life life)
+         (update-in  (update-in db [:hero :life]
+                                  (min max-life
+                                       (+ life
+                                          (:life-restore heart))))
+                       [:dungeon
+                        (:current-room db)
+                        :items
+                        :heart ] nil))
+       (if-let [weapon (get-in db [:dungeon
+                                 (:current-room db)
+                                 :items
+                                 :weapon ]) ]
+         (update-in  (update-in db
+                                [:hero :weapon]
+                                weapon)
+                       [:dungeon
+                        (:current-room db)
+                        :items
+                        :heart ] nil))))))
 
 
 (reg-event-db

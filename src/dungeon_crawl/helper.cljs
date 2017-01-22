@@ -11,18 +11,18 @@
 
 (defn bind-keys []
   "This function binds the game controls to the keyboard"
-  (clog (let [[hight width]
-              ( :dimensions @(subscribe [:running-room]) )]
-          (js/Mousetrap.reset)
-          (doseq
-            [[x y] (map vector ["w" "d" "s" "a"]
-                        [:up :right :down :left])]
-            (js/Mousetrap.bind x (fn []
-                                   (dispatch
-                                          [:move-hero
-                                             y
-                                             hight
-                                             width])))))))
+   (let [[hight width]
+               ( :dimensions @(subscribe [:running-room]) )]
+           (js/Mousetrap.reset)
+           (doseq
+             [[x y] (map vector ["w" "d" "s" "a"]
+                         [:up :right :down :left])]
+             (js/Mousetrap.bind x (fn []
+                                    (dispatch
+                                      [:move-hero
+                                       y
+                                       hight
+                                       width]))))))
 
 
 
@@ -39,20 +39,10 @@
 
 
 
-
-
 (defn collision? [hero sprite]
   "check if we are in the neiborhood of a sprite"
   (let [hero-neighborhood (vals  ( sprite-neiborhood  (hero :position)))]
      (some  #(= % (sprite :position) ) hero-neighborhood)))
-
-
-(defn interact-what-sprite? [hero sprite-array]
-"check for sprite interaction and return the sprite along with the index"
-(keep-indexed
-  (fn [idx item]
-    (when (collision? hero sprite)
-      (vector idx sprite))) sprite-array) )
 
 
 (defn exchange-attacks [hero monster]
@@ -76,8 +66,7 @@
             (exchange-attacks  hero hostile)]
     (if  (> 0 (:life wounded-enemy))
       (vector wounded-hero  (cons wounded-enemy non-hostile))
-      (vector wounded-hero   non-hostile)
-      )))
+      (vector wounded-hero   non-hostile))))
 
 
 

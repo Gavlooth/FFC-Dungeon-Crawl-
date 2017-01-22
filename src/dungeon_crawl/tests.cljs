@@ -9,7 +9,7 @@
 
 
 
-(def hero (consts/initial-state :hero))
+(def hero ( :hero initial-state ))
 
 
 
