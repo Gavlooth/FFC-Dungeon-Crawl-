@@ -1,5 +1,6 @@
 (ns dungeon-crawl.consts
-  (:require  [debux.cs.core :refer-macros [clog dbg break]]))
+  (:require  [debux.cs.core :refer-macros [clog dbg break]]
+             [taoensso.timbre :as timbre]))
 
 (defn set-damage [x]
   "Generate functions retarning integers between 1 and x"
@@ -10,7 +11,8 @@
 
 (def default-enemy  [{ :position [130 150],
                        :icon "#vilain-thug",
-                       :life 100,
+                       :life 20,
+                       :max-life 20,
                        :damage (set-damage 2)}])
 
 (def default-items [ {:heart  {:position [130 150]
@@ -20,7 +22,7 @@
 
 (def initial-exit [300 100])
 
-(def initial-state {:dungeon [{:room       {:dimensions [500 300],
+(def initial-state {:dungeon [{:room       {:dimensions [400 300],
                                             :items      default-items,
                                             :enemies    default-enemy,
                                             :exit       initial-exit}}],
@@ -32,7 +34,8 @@
                                        :damage (set-damage 4)},
                               :character-level  1,
                               :experience-points 100,
-                              :position [100 100]}})
+                              :position [100 100]}
+                    :enemy-bar  "0%" })
 
 
 

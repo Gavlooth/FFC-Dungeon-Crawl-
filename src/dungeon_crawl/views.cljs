@@ -31,15 +31,53 @@
   (let [enemies   @(subscribe [:monsters])  ]
      (map draw-sprite enemies)))
 
-
+(defn draw-game-status-bar [life level
+                            dungeon-level
+                            room xp
+                            enemy-life
+                            weapon
+                            hero-bar
+                            enemy-bar]
+  [:div {:id "status-bar"}
+   [:div
+    {:id "dungeon-level"} [:p (str  "Depth: " dungeon-level)]]
+   [:div
+    {:id "room"} [:p (str  "Room: " room)]]
+   [:div
+    {:id "level"} [:p  (str "Level: " level)]]
+   [:div
+    {:id "xp"} [:p (str "Xp: " xp)]]
+   [:div
+    {:id "weapon"} [:p (str "Weapon: " weapon)]]
+   [:div
+    {:id "hero-life"} [:p  "Hero:"]]
+  [:div {:class "szlider"}
+ [:div {:class "szliderbar"  :style {:width  hero-bar}} ]
+ [:div {:class "szazalek"} ]]
+   [:div
+    {:id "enemy-life"} [:p "Enemy: "]]
+   [:div {:class "szlider"}
+ [:div {:class "szliderbar"  :style {:width  enemy-bar}} ]
+ [:div {:class "szazalek"} ]]])
 
 (defn draw-room []
   (let [hero-position (:position @(subscribe [:hero]))
-        [width  height] (:dimensions  (:room @(subscribe [:room-viewed]))) ]
-       [:svg {:width width,
-             :height height,
-             :style {:background-color "lightblue" }}
-       [sprites]
-         (into  [:g  [hero hero-position] ] (draw-monsters) )]))
+        [width  height] (:dimensions  (:room @(subscribe [:room-viewed])))]
+    [:div {:id "game-window" }
+     [draw-game-status-bar @(subscribe [:life])
+      @(subscribe [:level])
+      @(subscribe [:dungeon-level])
+      @(subscribe [:room-number])
+      @(subscribe [:xp])
+      @(subscribe [:enemy-life])
+      @(subscribe [:weapon-at-hand])
+      @(subscribe [:set-hero-life-bar])
+      @(subscribe [:enemy-bar])]
 
-(def pipa  (:dimensions (:room @(subscribe [:room-viewed]))))
+     [:svg {:width width,
+            :height height,
+            :style {:background-color "lightblue" }}
+      [sprites]
+      (into  [:g  [hero hero-position] ] (draw-monsters) )]]))
+
+

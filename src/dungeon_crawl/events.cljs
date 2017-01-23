@@ -9,18 +9,14 @@
              [re-frame.core :refer [reg-event-db
                                     subscribe
                                     dispatch
-                                    dispatch-sync] :as re-frame]))
+                                    dispatch-sync] :as re-frame]
+              [taoensso.timbre :refer [spy]]))
 
 (enable-console-print!)
 
 
 
 
-
-
-#_(reg-event-db
-    :next-state
-    (fn [db [_ direction  width height]]  ))
 
 
 
@@ -67,7 +63,7 @@
    (let [ {:keys [ hero current-room dungeon-level dungeon]} db
           {:keys [dimensions items enemies exit] [width height] :dimensions }
            (get-in dungeon [current-room :room])
-          in-combat? (clog (some #( collision? hero %) enemies))  ]
+          in-combat? (spy :info (some #( collision? hero %) enemies))  ]
      (if in-combat?
        (let [combat-outcome (helper/set-combat-outcome enemies hero)]
          (assoc-in

@@ -16,7 +16,8 @@
                  [re-frame "0.9.1"]
                  [binaryage/devtools "0.8.3"]
                  [binaryage/dirac "1.0.0"]
-                 [cljsjs/mousetrap "1.5.3-0"]]
+                 [cljsjs/mousetrap "1.5.3-0"]
+                 [com.taoensso/timbre "4.8.0"]]
 
 
   :plugins [[lein-figwheel "0.5.8"]

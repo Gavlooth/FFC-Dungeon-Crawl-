@@ -1,7 +1,10 @@
 (ns dungeon-crawl.helper
    (:require  [debux.cs.core :refer-macros [clog dbg break]]
               [re-frame.core :refer [dispatch subscribe] :as re-frame]
-              [dungeon-crawl.consts :as consts]))
+              [dungeon-crawl.consts :as consts]
+              [taoensso.timbre :refer [spy]]))
+
+
 
 
 (def directions [:up :up-left
