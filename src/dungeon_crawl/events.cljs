@@ -1,16 +1,15 @@
 (ns dungeon-crawl.events
-   (:require [dungeon-crawl.consts :refer [initial-state default-enemy default-items]]
-             [dungeon-crawl.helper :refer [ collision?] :as helper]
-             [reagent.core :refer [render] :as reagent]
-             [reagent.ratom :refer [reaction]]
-             [cljsjs.mousetrap]
-             [devtools.core :as devtools]
-             [debux.cs.core :refer-macros [clog dbg break]]
-             [re-frame.core :refer [reg-event-db
-                                    subscribe
-                                    dispatch
-                                    dispatch-sync] :as re-frame]
-              [taoensso.timbre :refer [spy]]))
+  (:require [dungeon-crawl.consts :refer [initial-state default-enemy default-items]]
+            [dungeon-crawl.helper :refer [ collision?] :as helper]
+            [reagent.core :refer [render] :as reagent]
+            [reagent.ratom :refer [reaction]]
+            [cljsjs.mousetrap]
+            [devtools.core :as devtools]
+            [re-frame.core :refer [reg-event-db
+                                   subscribe
+                                   dispatch
+                                   dispatch-sync] :as re-frame]
+            [taoensso.timbre :refer [spy]]))
 
 (enable-console-print!)
 

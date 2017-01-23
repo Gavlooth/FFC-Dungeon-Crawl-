@@ -9,7 +9,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
 				         [cljsjs/mousetrap "1.5.3-0"]
                  [org.clojure/clojurescript "1.9.293"]
-                 [philoskim/debux "0.2.1"]
+
                  [org.clojure/core.async "0.2.395"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]

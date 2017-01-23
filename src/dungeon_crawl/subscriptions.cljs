@@ -1,6 +1,7 @@
 (ns dungeon-crawl.subscriptions
-  (:require  [debux.cs.core :refer-macros [clog dbg break]]
+  (:require
              [reagent.ratom :refer [reaction]]
+             [taoensso.timbre :refer [spy]]
              [devtools.core :as devtools]
              [re-frame.core :refer [reg-sub-raw subscribe] :as re-frame]))
 

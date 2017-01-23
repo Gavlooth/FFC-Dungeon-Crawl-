@@ -11,9 +11,9 @@
                                    dispatch-sync] :as re-frame]
             [goog.events :as events]
             [cljsjs.mousetrap]
-            [debux.cs.core :refer-macros [clog dbg break]]
+            [taoensso.timbre :refer [spy]]
             [dungeon-crawl.helper :refer [bind-keys]]
-          [dungeon-crawl.events :refer [initialize-game]]))
+            [dungeon-crawl.events :refer [initialize-game]]))
 (enable-console-print!)
 
 (defn run []

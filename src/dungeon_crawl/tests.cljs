@@ -1,5 +1,5 @@
 (ns dungeon-crawl.tests
-  (:require  [debux.cs.core :refer-macros [clog dbg break]]
+  (:require  [taoensso.timbre :refer [spy]]
              [devtools.core :as devtools]
              [dungeon-crawl.helper :as helper]
              [dungeon-crawl.consts :as consts :refer [initial-state default-enemy]]

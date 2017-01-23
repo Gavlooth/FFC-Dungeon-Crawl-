@@ -2,7 +2,7 @@
   (:require [re-frame.core :refer [subscribe] :as re-frame]
             [dungeon-crawl.consts :refer [sprites] :as consts]
             [dungeon-crawl.events]
-            [debux.cs.core :refer-macros [clog dbg break]]
+
             ))
 
 (def default-enemy   [{:x 100,

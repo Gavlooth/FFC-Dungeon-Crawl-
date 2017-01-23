@@ -1,6 +1,5 @@
 (ns dungeon-crawl.consts
-  (:require  [debux.cs.core :refer-macros [clog dbg break]]
-             [taoensso.timbre :as timbre]))
+  (:require  [taoensso.timbre :refer [spy]]))
 
 (defn set-damage [x]
   "Generate functions retarning integers between 1 and x"
