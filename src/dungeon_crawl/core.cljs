@@ -17,12 +17,12 @@
 (enable-console-print!)
 
 (defn run []
- (initialize-game)
-  (let [[width heigth] (:dimensions (clog @(subscribe [:running-room])))]
-   (js/Mousetrap.reset)
-   (bind-keys)
+  (do
+    (initialize-game)
+    (js/Mousetrap.reset)
+    (bind-keys)
     (render   [draw-room]
-                     (.getElementById js/document "app"))))
+              (.getElementById js/document "app"))))
 
  (run)
 

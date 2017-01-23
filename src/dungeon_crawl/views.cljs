@@ -35,10 +35,11 @@
 
 (defn draw-room []
   (let [hero-position (:position @(subscribe [:hero]))
-        [width  height] (:dimensions  @(subscribe [:running-room])) ]
+        [width  height] (:dimensions  (:room @(subscribe [:room-viewed]))) ]
        [:svg {:width width,
              :height height,
              :style {:background-color "lightblue" }}
        [sprites]
          (into  [:g  [hero hero-position] ] (draw-monsters) )]))
 
+(def pipa  (:dimensions (:room @(subscribe [:room-viewed]))))

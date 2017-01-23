@@ -20,7 +20,7 @@
 
 #_(reg-event-db
     :next-state
-    (fn [db [_ direction  width hight]]  ))
+    (fn [db [_ direction  width height]]  ))
 
 
 
@@ -65,9 +65,9 @@
  :move-hero
  (fn [db [_ direction]]
    (let [ {:keys [ hero current-room dungeon-level dungeon]} db
-          {:keys [dimensions items enemies exit] [width hight] :dimensions }
+          {:keys [dimensions items enemies exit] [width height] :dimensions }
            (get-in dungeon [current-room :room])
-          in-combat? (some #( collision? hero %) enemies)  ]
+          in-combat? (clog (some #( collision? hero %) enemies))  ]
      (if in-combat?
        (let [combat-outcome (helper/set-combat-outcome enemies hero)]
          (assoc-in
@@ -75,7 +75,6 @@
            [:dungeon
             current-room
             :room :enemies] combat-outcome))
-
        (cond
          (= :up direction) (update-in db [:hero :position]
                                       (fn [[a b]]  [a (max 0 (- b 5))]))
@@ -88,7 +87,7 @@
 
          (= :down direction)  (update-in db [:hero :position]
                                          (fn [[a b]]
-                                           [a (max  (clog (- hight 15)) (+ 5  b))]))
+                                           [a (min   (- height 15)  (+ 5  b))]))
 
 
          (= :left direction) (update-in db [:hero :position]
