@@ -3,9 +3,24 @@
               [goog.math :as math]
               [re-frame.core :refer [dispatch subscribe] :as re-frame]
               [dungeon-crawl.consts :as consts]
+
               [taoensso.timbre :refer [spy]]))
 
 (def min-dist 17)
+
+
+(defn set-damage [x]
+  "Generate functions retarning integers between 1 and x"
+  (if ( > x 1)
+    (fn [] (inc  (rand-int  x)))
+    (fn [] 1)))
+
+
+(defn damage-bonus [level base-damage]
+  (+ level  (reduce + (repeatedly level   (set-damage base-damage)))))
+
+
+
 
 
 (def directions [:up :up-left
@@ -63,8 +78,6 @@
      (if  (< 0 (:life wounded-enemy))
        (vector wounded-hero (into [] (cons wounded-enemy non-hostile)))
                   (vector wounded-hero   non-hostile))))
-
-
 
 
 

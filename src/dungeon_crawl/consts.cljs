@@ -58,15 +58,22 @@
                     :dungeon-level 1,
                     :hero    {:life 100,
                               :max-life 100
-                              :weapon {:name "bare hands",
-                                       :damage (set-damage 4)},
+                              :weapon {:name "Bare hands",
+                                       :damage 4},
                               :character-level  1,
                               :experience-points 0,
                               :position [100 100]}
                     :enemy-bar  "0%" })
 
 
+(defn hand-axe {:name "hand-axe",
+               :damage 3})
 
+(defn club {:name "Club",
+            :damage 5})
+
+(defn great-sword {:name "Great Sword",
+                  :damage 7})
 
 
 (defn sprites []
