@@ -9,15 +9,15 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
 				         [cljsjs/mousetrap "1.5.3-0"]
                  [org.clojure/clojurescript "1.9.293"]
-
                  [org.clojure/core.async "0.2.395"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
                  [re-frame "0.9.1"]
                  [binaryage/devtools "0.8.3"]
                  [binaryage/dirac "1.0.0"]
-                 [cljsjs/mousetrap "1.5.3-0"]
-                 [com.taoensso/timbre "4.8.0"]]
+                 [com.taoensso/timbre "4.8.0"]
+
+]
 
 
   :plugins [[lein-figwheel "0.5.8"]

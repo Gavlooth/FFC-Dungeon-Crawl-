@@ -62,14 +62,16 @@
    (let [ {:keys [ hero current-room dungeon-level dungeon]} db
           {:keys [dimensions items enemies exit] [width height] :dimensions }
            (get-in dungeon [current-room :room])
-          in-combat? (spy :info (some #( collision? hero %) enemies))  ]
+          in-combat?  (some #( collision? hero %) enemies)  ]
      (if in-combat?
-       (let [combat-outcome (helper/set-combat-outcome enemies hero)]
-         (assoc-in
-           db
-           [:dungeon
-            current-room
-            :room :enemies] combat-outcome))
+       (let [ [wounded-hero wounded-enemy] (spy :info (helper/set-combat-outcome enemies hero))]
+         (assoc
+           (assoc-in
+                       db
+                       [:dungeon
+                        current-room
+                        :room :enemies] wounded-enemy)
+           :hero wounded-hero))
        (cond
          (= :up direction) (update-in db [:hero :position]
                                       (fn [[a b]]  [a (max 0 (- b 5))]))

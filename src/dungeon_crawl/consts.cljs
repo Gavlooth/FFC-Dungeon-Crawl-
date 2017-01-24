@@ -1,6 +1,9 @@
 (ns dungeon-crawl.consts
   (:require  [taoensso.timbre :refer [spy]]))
 
+
+(def xp-table [0 10 30 70 140])
+
 (defn set-damage [x]
   "Generate functions retarning integers between 1 and x"
   (if ( > x 1)
@@ -8,11 +11,37 @@
     (fn [] 1)))
 
 
-(def default-enemy  [{ :position [130 150],
-                       :icon "#vilain-thug",
+(def thug  { :position [130 150],
+               :icon "#vilain-thug",
+               :life 20,
+               :max-life 20,
+               :damage (set-damage 2)
+               :xp 2})
+
+
+(def vampire { :position [130 150],
+                       :icon "#vilain-vampire",
+                       :life 40,
+                       :max-life 60,
+                       :damage (set-damage 4)
+                       :xp 4})
+
+
+(def vilain-The-Devil { :position [130 150],
+                       :icon "#vilain-The-Devil",
+                       :life 20,
+                       :max-life 80,
+                       :damage (set-damage 6)
+                       :xp 6})
+
+
+(def vilain-Heisenberg { :position [130 150],
+                       :icon "#vilain-Heisenberg",
                        :life 20,
                        :max-life 20,
-                       :damage (set-damage 2)}])
+                       :damage (set-damage 10)
+                       :xp 10})
+
 
 (def default-items [ {:heart  {:position [130 150]
                                  :icon "#item-heart"
@@ -21,9 +50,9 @@
 
 (def initial-exit [300 100])
 
-(def initial-state {:dungeon [{:room       {:dimensions [400 300],
-                                            :items      default-items,
-                                            :enemies    default-enemy,
+(def initial-state {:dungeon [{:room       {:dimensions [500 300],
+                                            :items      nil,
+                                            :enemies    [thug],
                                             :exit       initial-exit}}],
                     :current-room 0,
                     :dungeon-level 1,
@@ -32,7 +61,7 @@
                               :weapon {:name "bare hands",
                                        :damage (set-damage 4)},
                               :character-level  1,
-                              :experience-points 100,
+                              :experience-points 0,
                               :position [100 100]}
                     :enemy-bar  "0%" })
 
